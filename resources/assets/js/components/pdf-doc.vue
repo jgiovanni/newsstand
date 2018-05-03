@@ -1,7 +1,15 @@
 <template>
 	<div>
-		<!--<pdf v-if="source" src="source"></pdf>-->
-		<pdf v-if="src" v-for="i in numPages"
+		<b-progress v-if="loadedRatio < 1" :value="(loadedRatio * 100)" animated></b-progress>
+		<pdf v-if="source && !multi"
+		     :src="source"
+		     :page="page"
+		     @password="password"
+		     @progress="loadedRatio = $event"
+		     @error="error"
+		     @num-pages="numPages = $event"
+		     @link-clicked="page = $event"></pdf>
+		<pdf v-else-if="src && multi" v-for="i in numPages"
 			:key="i"
 			:src="src"
 			:page="i"
@@ -9,19 +17,26 @@
 			 @progress="loadedRatio = $event"
 			 @error="error"
 			 @num-pages="numPages = maxPage"
-			 @link-clicked="page = $event"
-		></pdf>
+			 @link-clicked="page = $event"></pdf>
+
+		<b-pagination-nav class="pdf-nav" align="center" v-if="numPages" base-url="#" :number-of-pages="numPages" v-model="page" />
 	</div>
 </template>
-<style></style>
+<style>
+	.pdf-nav {
+		bottom: 20px;
+	}
+</style>
 <script type="text/javascript">
   import pdf from 'vue-pdf';
+  import stickybits from 'stickybits';
 
   export default {
     name: 'pdf-doc',
     components: { pdf },
     props: {
       source: { type: String, },
+      multi: { type: Boolean, default: false },
       maxPage: { type: Number, default: 3 },
       search: { type: String, },
     },
@@ -31,7 +46,7 @@
         src: pdf.createLoadingTask(this.source),
         loadedRatio: 0,
         page: 1,
-        numPages: 0,
+        numPages: undefined,
         rotate: 0,
       }
     },
@@ -51,6 +66,8 @@
     mounted() {
       this.src.then(pdf => {
         this.numPages = pdf.numPages;
+      }).then(() => {
+        stickybits('.pdf-nav');
       });
     }
   }

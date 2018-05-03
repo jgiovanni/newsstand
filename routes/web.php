@@ -18,4 +18,21 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/home', 'HomeController@index')->name('profile');
+Route::get('/today', function () {
+    return view('home');
+})->name('today');
+Route::get('/past', function () {
+    return view('past-news');
+})->name('past');
+Route::get('/articles', function () {
+    return view('articles.index');
+})->name('articles');
+Route::get('/editorials/{category}', function ($category) {
+    return view('editorials.category', compact('category'));
+})->name('editorials');
+Route::get('/breaking-news', function () {
+    return view('breaking-news');
+})->name('breaking-news');
+Route::get('/profile', function () {
+    return view('editorials.category');
+})->name('profile');
