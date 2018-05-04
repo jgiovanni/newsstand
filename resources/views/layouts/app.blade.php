@@ -30,7 +30,7 @@
 <body>
     <div id="app">
         @guest
-            <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <nav class="navbar navbar-expand-md navbar-light navbar-laravel sticky-top">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('thisday-logo-300x72.png') }}" width="125" height="30" class="d-inline-block align-top" alt="This Day">
@@ -74,7 +74,7 @@
                 </div>
             </nav>
         @else
-            <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <nav class="navbar navbar-expand-md navbar-light navbar-laravel sticky-top">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('thisday-logo-300x72.png') }}" width="125" height="30" class="d-inline-block align-top" alt="This Day">
@@ -118,7 +118,7 @@
                     </ul>
                 </div>
             </nav>
-            <nav class="navbar navbar-expand-md navbar-light bg-light navbar-subnav">
+            <nav class="navbar navbar-expand-md navbar-light bg-light navbar-subnav sticky-top">
                     <div class="container">
 
                         {{--<a class="navbar-brand" href="{{ url('/') }}">
@@ -128,8 +128,8 @@
                         <div class="collapse navbar-collapse" id="navbarSubnavContent">
                             <!-- Left Side Of Navbar -->
                             <ul class="navbar-nav mr-auto">
-                                <li class="{{ isActiveRoute('home') || isActiveRoute('today') }}"><a class="nav-link" href="{{ route('today') }}">Today's News</a></li>
-                                <li class="{{ isActiveRoute('past') }}"><a class="nav-link" href="{{ route('past') }}">Past News</a></li>
+                                <li class="{{ isActiveRoute('home') || isActiveRoute('today') }}"><a class="nav-link" href="{{ route('today') }}">Today's Newspaper</a></li>
+                                <li class="{{ isActiveRoute('past') }}"><a class="nav-link" href="{{ route('past') }}">Past Newspaper</a></li>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle {{ isActiveRoute('editorials') }}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         Editorials <span class="caret"></span>

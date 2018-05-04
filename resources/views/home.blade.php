@@ -13,7 +13,7 @@
             @guest
                 <pdf src="./pdfs/20180425TD.pdf"></pdf>
             @else
-                <pdf-doc source="./pdfs/20180425TD.pdf"></pdf-doc>
+                <pdf-doc source="/pdfs/20180425TD.pdf"></pdf-doc>
             @endguest
         </div>
     </div>
