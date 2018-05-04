@@ -68,6 +68,8 @@
         this.numPages = pdf.numPages;
       }).then(() => {
         stickybits('.pdf-nav');
+        // let ctx = $('canvas')[0].getContext("2d");
+        // ctx.scale(3, 3);
       });
     }
   }

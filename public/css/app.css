@@ -10735,3 +10735,7 @@ a.text-dark:focus {
   text-transform: uppercase;
 }
 
+.navbar-subnav li.active {
+  font-weight: bold;
+}
+

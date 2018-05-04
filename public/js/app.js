@@ -118975,6 +118975,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.numPages = pdf.numPages;
     }).then(function () {
       Object(__WEBPACK_IMPORTED_MODULE_1_stickybits__["a" /* default */])('.pdf-nav');
+      // let ctx = $('canvas')[0].getContext("2d");
+      // ctx.scale(3, 3);
     });
   }
 });
