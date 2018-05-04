@@ -1,1 +1,1 @@
-web: vendor/bin/heroku-php-nginx -C etc/heroku/nginx.conf public/
+web: vendor/bin/heroku-php-nginx public/
