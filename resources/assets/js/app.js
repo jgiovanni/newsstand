@@ -15,6 +15,7 @@ window.Vue = require('vue');
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.use(require('bootstrap-vue'));
+Vue.use(require('vue-social-sharing'));
 Vue.component('pdf', require('vue-pdf'));
 Vue.component('pdf-doc', require('./components/pdf-doc'));
 const app = new Vue({

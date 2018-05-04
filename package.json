@@ -21,10 +21,12 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "@blocklevel/vue-social": "^2.1.0",
         "bootstrap-vue": "^2.0.0-rc.9",
         "pdfviewer": "^1.1.0",
         "stickybits": "^3.3.1",
         "vue-pdf": "^3.3.1",
-        "vue-router": "^3.0.1"
+        "vue-router": "^3.0.1",
+        "vue-social-sharing": "^2.3.3"
     }
 }

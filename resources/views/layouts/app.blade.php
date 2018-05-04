@@ -30,7 +30,7 @@
 <body>
     <div id="app">
         @guest
-            <nav class="navbar navbar-light navbar-laravel sticky-top">
+            <nav class="navbar navbar-expand navbar-light navbar-laravel sticky-top">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('thisday-logo-300x72.png') }}" width="125" height="30" class="d-inline-block align-top" alt="This Day">
@@ -188,6 +188,39 @@
         @endauth
 
         <main class="py-4">
+            <div class="container pb-4">
+                <div class="row">
+                    <div class="col-sm"></div>
+                    <div class="col-sm">
+                        <social-sharing url="{!! url()->current() !!}"
+                                        title="This Day"
+                                        description=""
+                                        quote=""
+                                        hashtags="thisday, newspaper"
+                                        twitter-user=""
+                                        inline-template>
+                            <div>
+                                <network network="email" class="btn btn-sm btn-outline-secondary">
+                                    <i class="fa fa-envelope"></i> Email
+                                </network>
+                                <network network="facebook" class="btn btn-sm btn-outline-primary">
+                                    <i class="fa fa-facebook"></i> Facebook
+                                </network>
+                                <network network="googleplus" class="btn btn-sm btn-outline-danger">
+                                    <i class="fa fa-google-plus"></i> Google +
+                                </network>
+                                <network network="pinterest" class="btn btn-sm btn-outline-danger">
+                                    <i class="fa fa-pinterest"></i> Pinterest
+                                </network>
+
+                                <network network="twitter" class="btn btn-sm btn-outline-info">
+                                    <i class="fa fa-twitter"></i> Twitter
+                                </network>
+                            </div>
+                        </social-sharing>
+                    </div>
+                </div>
+            </div>
             @yield('content')
         </main>
 
