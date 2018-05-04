@@ -30,7 +30,7 @@
 <body>
     <div id="app">
         @guest
-            <nav class="navbar navbar-expand-md navbar-light navbar-laravel sticky-top">
+            <nav class="navbar navbar-light navbar-laravel sticky-top">
                 <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('thisday-logo-300x72.png') }}" width="125" height="30" class="d-inline-block align-top" alt="This Day">
@@ -74,51 +74,52 @@
                 </div>
             </nav>
         @else
-            <nav class="navbar navbar-expand-md navbar-light navbar-laravel sticky-top">
-                <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="{{ asset('thisday-logo-300x72.png') }}" width="125" height="30" class="d-inline-block align-top" alt="This Day">
-                    </a>
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                            <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('profile') }}">
-                                        Profile
+            <nav class="navbar sticky-top p-0" style="flex-direction: column;">
+                <nav class="navbar navbar-expand-sm navbar-light navbar-laravel w-100">
+                    <div class="container">
+                        <a class="navbar-brand" href="{{ url('/') }}">
+                            <img src="{{ asset('thisday-logo-300x72.png') }}" width="125" height="30" class="d-inline-block align-top" alt="This Day">
+                        </a>
+                        <!-- Left Side Of Navbar -->
+                        <ul class="navbar-nav mr-auto">
+                            <!-- Authentication Links -->
+                            @guest
+                                <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                                <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                            @else
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                        {{ Auth::user()->name }} <span class="caret"></span>
                                     </a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="{{ route('profile') }}">
+                                            Profile
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                            {{ __('Logout') }}
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                </li>
+                            @endguest
+                        </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <li><a class="btn btn-light btn-sm my-2 my-sm-0" href="#">Subscribe for Full News</a></li>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSubnavContent" aria-controls="navbarSubnavContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                    </ul>
-                </div>
-            </nav>
-            <nav class="navbar navbar-expand-md navbar-light bg-light navbar-subnav sticky-top">
+                        <!-- Right Side Of Navbar -->
+                        <ul class="navbar-nav ml-auto">
+                            <li><a class="btn btn-light btn-sm my-2 my-sm-0" href="#">Subscribe for Full News</a></li>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSubnavContent" aria-controls="navbarSubnavContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                        </ul>
+                    </div>
+                </nav>
+                <nav class="navbar navbar-expand navbar-light bg-light navbar-subnav  w-100">
                     <div class="container">
 
                         {{--<a class="navbar-brand" href="{{ url('/') }}">
@@ -128,7 +129,7 @@
                         <div class="collapse navbar-collapse" id="navbarSubnavContent">
                             <!-- Left Side Of Navbar -->
                             <ul class="navbar-nav mr-auto">
-                                <li class="{{ isActiveRoute('home') || isActiveRoute('today') }}"><a class="nav-link" href="{{ route('today') }}">Today's Newspaper</a></li>
+                                <li class="{{ areActiveRoutes(['home', 'today']) }}"><a class="nav-link" href="{{ route('today') }}">Today's Newspaper</a></li>
                                 <li class="{{ isActiveRoute('past') }}"><a class="nav-link" href="{{ route('past') }}">Past Newspaper</a></li>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle {{ isActiveRoute('editorials') }}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -174,7 +175,7 @@
                                 <li class="{{ isActiveRoute('articles') }}"><a class="nav-link" href="{{ route('articles') }}">Articles by Name</a></li>
                                 <li class="{{ isActiveRoute('breaking-news') }}"><a class="nav-link" href="{{ route('breaking-news') }}">Breaking News</a></li>
                             </ul>
-    
+
                             <!-- Right Side Of Navbar -->
                             <ul class="navbar-nav ml-auto">
 
@@ -182,6 +183,8 @@
                         </div>
                     </div>
                 </nav>
+
+            </nav>
         @endauth
 
         <main class="py-4">
