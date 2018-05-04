@@ -128,7 +128,7 @@
                         <div class="collapse navbar-collapse" id="navbarSubnavContent">
                             <!-- Left Side Of Navbar -->
                             <ul class="navbar-nav mr-auto">
-                                <li class="{{ isActiveRoute('home') || isActiveURL('today') }}"><a class="nav-link" href="{{ route('today') }}">Today's News</a></li>
+                                <li class="{{ isActiveRoute('home') || isActiveRoute('today') }}"><a class="nav-link" href="{{ route('today') }}">Today's News</a></li>
                                 <li class="{{ isActiveRoute('past') }}"><a class="nav-link" href="{{ route('past') }}">Past News</a></li>
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle {{ isActiveRoute('editorials') }}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
