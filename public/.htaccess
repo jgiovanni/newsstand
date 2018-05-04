@@ -19,7 +19,34 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 </IfModule>
+<IfModule mod_headers.c>
+    # Serve gzip compressed CSS files if they exist
+    # and the client accepts gzip.
+    RewriteCond "%{HTTP:Accept-encoding}" "gzip"
+    RewriteCond "%{REQUEST_FILENAME}\.gz" -s
+    RewriteRule "^(.*)\.css" "$1\.css\.gz" [QSA]
 
+    # Serve gzip compressed JS files if they exist
+    # and the client accepts gzip.
+    RewriteCond "%{HTTP:Accept-encoding}" "gzip"
+    RewriteCond "%{REQUEST_FILENAME}\.gz" -s
+    RewriteRule "^(.*)\.js" "$1\.js\.gz" [QSA]
+
+
+    # Serve correct content types, and prevent mod_deflate double gzip.
+    RewriteRule "\.css\.gz$" "-" [T=text/css,E=no-gzip:1]
+    RewriteRule "\.js\.gz$" "-" [T=text/javascript,E=no-gzip:1]
+
+
+    <FilesMatch "(\.js\.gz|\.css\.gz)$">
+      # Serve correct encoding type.
+      Header append Content-Encoding gzip
+
+      # Force proxies to cache gzipped &
+      # non-gzipped css/js files separately.
+      Header append Vary Accept-Encoding
+    </FilesMatch>
+</IfModule>
 <IfModule mod_deflate.c>
 
     # Force compression for mangled `Accept-Encoding` request headers
@@ -99,3 +126,44 @@
     </IfModule>
 
 </IfModule>
+
+ <IfModule mod_headers.c>
+
+     RewriteCond %{HTTP:Accept-Encoding} gzip
+     RewriteCond %{REQUEST_FILENAME}\.gz -f
+     RewriteRule \.(css|ics|js|json|html|svg)$ %{REQUEST_URI}.gz [L]
+
+     # Prevent mod_deflate double gzip
+     RewriteRule \.gz$ - [E=no-gzip:1]
+
+     <FilesMatch "\.gz$">
+
+         # Serve correct content types
+         <IfModule mod_mime.c>
+             # (1)
+             RemoveType gz
+
+             # Serve correct content types
+             AddType text/css              css.gz
+             AddType text/calendar         ics.gz
+             AddType text/javascript       js.gz
+             AddType application/json      json.gz
+             AddType text/html             html.gz
+             AddType image/svg+xml         svg.gz
+
+             # Serve correct content charset
+             AddCharset utf-8 .css.gz \
+                              .ics.gz \
+                              .js.gz \
+                              .json.gz
+         </IfModule>
+
+         # Force proxies to cache gzipped and non-gzipped files separately
+         Header append Vary Accept-Encoding
+
+     </FilesMatch>
+
+     # Serve correct encoding type
+     AddEncoding gzip .gz
+
+ </IfModule>
