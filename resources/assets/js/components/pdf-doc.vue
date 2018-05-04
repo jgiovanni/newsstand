@@ -9,7 +9,7 @@
 		     @error="error"
 		     @num-pages="numPages = $event"
 		     @link-clicked="page = $event"></pdf>
-		<pdf v-else-if="src && multi" v-for="i in numPages"
+		<!--<pdf v-else-if="src && multi" v-for="i in numPages"
 			:key="i"
 			:src="src"
 			:page="i"
@@ -17,7 +17,7 @@
 			 @progress="loadedRatio = $event"
 			 @error="error"
 			 @num-pages="numPages = maxPage"
-			 @link-clicked="page = $event"></pdf>
+			 @link-clicked="page = $event"></pdf>-->
 
 		<b-pagination-nav class="pdf-nav" align="center" v-if="numPages" base-url="#" :number-of-pages="numPages" v-model="page" />
 	</div>

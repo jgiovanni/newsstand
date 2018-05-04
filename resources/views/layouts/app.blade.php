@@ -30,8 +30,8 @@
 <body>
     <div id="app">
         @guest
-            <nav class="navbar navbar-expand-md navbar-dark navbar-laravel">
-                <div class="container-fluid">
+            <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+                <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('thisday-logo-300x72.png') }}" width="125" height="30" class="d-inline-block align-top" alt="This Day">
                     </a>
@@ -74,8 +74,8 @@
                 </div>
             </nav>
         @else
-            <nav class="navbar navbar-expand-md navbar-dark navbar-laravel">
-                <div class="container-fluid">
+            <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+                <div class="container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('thisday-logo-300x72.png') }}" width="125" height="30" class="d-inline-block align-top" alt="This Day">
                     </a>
@@ -106,19 +106,19 @@
                                     </form>
                                 </div>
                             </li>
-                            <li><a class="nav-link" href="#">Subscribe for Full News</a></li>
                         @endguest
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                        <li><a class="btn btn-light btn-sm my-2 my-sm-0" href="#">Subscribe for Full News</a></li>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSubnavContent" aria-controls="navbarSubnavContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     </ul>
                 </div>
             </nav>
-            <nav class="navbar navbar-expand-md navbar-light sticky-top bg-light navbar-subnav">
+            <nav class="navbar navbar-expand-md navbar-light bg-light navbar-subnav">
                     <div class="container">
 
                         {{--<a class="navbar-brand" href="{{ url('/') }}">
@@ -128,51 +128,51 @@
                         <div class="collapse navbar-collapse" id="navbarSubnavContent">
                             <!-- Left Side Of Navbar -->
                             <ul class="navbar-nav mr-auto">
-                                <li><a class="nav-link" href="{{ route('today') }}">Today's News</a></li>
-                                <li><a class="nav-link" href="{{ route('past') }}">Past News</a></li>
+                                <li class="{{ isActiveRoute('home') || isActiveURL('today') }}"><a class="nav-link" href="{{ route('today') }}">Today's News</a></li>
+                                <li class="{{ isActiveRoute('past') }}"><a class="nav-link" href="{{ route('past') }}">Past News</a></li>
                                 <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle {{ isActiveRoute('editorials') }}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         Editorials <span class="caret"></span>
                                     </a>
                                     <div class="dropdown-menu" aria-labelledby="dropdown01">
-                                        <a class="dropdown-item" href="{{ route('editorials', 'saved-for-later') }}">Saved for later</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'sports') }}">Sports</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'lifestyle') }}">Lifestyle</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'most-popular') }}">Most popular</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'politics') }}">Politics</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'nigeria') }}">Nigeria</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'world') }}">World</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'opinion') }}">Opinion</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'business') }}">Business</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('saved-for-later') }}" href="{{ route('editorials', 'saved-for-later') }}">Saved for later</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('sports') }}" href="{{ route('editorials', 'sports') }}">Sports</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('lifestyle') }}" href="{{ route('editorials', 'lifestyle') }}">Lifestyle</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('most-popular') }}" href="{{ route('editorials', 'most-popular') }}">Most popular</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('politics') }}" href="{{ route('editorials', 'politics') }}">Politics</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('nigeria') }}" href="{{ route('editorials', 'nigeria') }}">Nigeria</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('world') }}" href="{{ route('editorials', 'world') }}">World</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('opinion') }}" href="{{ route('editorials', 'opinion') }}">Opinion</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('business') }}" href="{{ route('editorials', 'business') }}">Business</a>
                                         <h6 class="dropdown-header">More</h6>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'fashion') }}">Fashion</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'lifestyle') }}">Lifestyle</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'education') }}">Education</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'technology') }}">Technology</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'deal-books') }}">Deal-books</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'science') }}">Science</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'climate--environment') }}">Climate & Environment</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'health') }}">Health</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'wellness-nutrition--fitness') }}">Wellness: Nutrition and Fitness</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'arts') }}">Arts</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'books') }}">Books</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'movies') }}">Movies</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'music') }}">Music</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'TV') }}">TV</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'sunday-review') }}">Sunday Review</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'food') }}">Food</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'weddings') }}">Weddings</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'travel') }}">Travel</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'magazine') }}">Magazine</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'automobile') }}">Automobile</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'obituaries') }}">Obituaries</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'photo-galleria') }}">Photo Galleria</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'videos') }}">Videos</a>
-                                        <a class="dropdown-item" href="{{ route('editorials', 'visual-journalism')}}">Visual Journalism</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('fashion') }}" href="{{ route('editorials', 'fashion') }}">Fashion</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('lifestyle') }}" href="{{ route('editorials', 'lifestyle') }}">Lifestyle</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('education') }}" href="{{ route('editorials', 'education') }}">Education</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('technology') }}" href="{{ route('editorials', 'technology') }}">Technology</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('deal-books') }}" href="{{ route('editorials', 'deal-books') }}">Deal-books</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('science') }}" href="{{ route('editorials', 'science') }}">Science</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('climate--environment') }}" href="{{ route('editorials', 'climate--environment') }}">Climate & Environment</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('health') }}" href="{{ route('editorials', 'health') }}">Health</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('wellness-nutrition--fitness') }}" href="{{ route('editorials', 'wellness-nutrition--fitness') }}">Wellness: Nutrition and Fitness</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('arts') }}" href="{{ route('editorials', 'arts') }}">Arts</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('books') }}" href="{{ route('editorials', 'books') }}">Books</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('movies') }}" href="{{ route('editorials', 'movies') }}">Movies</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('music') }}" href="{{ route('editorials', 'music') }}">Music</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('TV') }}" href="{{ route('editorials', 'TV') }}">TV</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('sunday-review') }}" href="{{ route('editorials', 'sunday-review') }}">Sunday Review</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('food') }}" href="{{ route('editorials', 'food') }}">Food</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('weddings') }}" href="{{ route('editorials', 'weddings') }}">Weddings</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('travel') }}" href="{{ route('editorials', 'travel') }}">Travel</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('magazine') }}" href="{{ route('editorials', 'magazine') }}">Magazine</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('automobile') }}" href="{{ route('editorials', 'automobile') }}">Automobile</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('obituaries') }}" href="{{ route('editorials', 'obituaries') }}">Obituaries</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('photo-galleria') }}" href="{{ route('editorials', 'photo-galleria') }}">Photo Galleria</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('videos') }}" href="{{ route('editorials', 'videos') }}">Videos</a>
+                                        <a  class="dropdown-item {{ isActiveMatch('visual-journalism') }}" href="{{ route('editorials', 'visual-journalism')}}">Visual Journalism</a>
                                     </div>
                                 </li>
-                                <li><a class="nav-link" href="{{ route('articles') }}">Articles by Name</a></li>
-                                <li><a class="nav-link" href="{{ route('breaking-news') }}">Breaking News</a></li>
+                                <li class="{{ isActiveRoute('articles') }}"><a class="nav-link" href="{{ route('articles') }}">Articles by Name</a></li>
+                                <li class="{{ isActiveRoute('breaking-news') }}"><a class="nav-link" href="{{ route('breaking-news') }}">Breaking News</a></li>
                             </ul>
     
                             <!-- Right Side Of Navbar -->
@@ -203,10 +203,10 @@
                                 @csrf
 
                                 <div class="form-group row">
-                                    <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                    <label for="loginEmail" class="col-sm-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                                        <input id="loginEmail" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
 
                                         @if ($errors->has('email'))
                                             <span class="invalid-feedback">
@@ -217,10 +217,10 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    <label for="loginPassword" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
+                                        <input id="loginPassword" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
                                         @if ($errors->has('password'))
                                             <span class="invalid-feedback">
