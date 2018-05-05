@@ -41,6 +41,7 @@
 			-webkit-transform: translateY(-50%) scale(.75, .25);
 			-ms-transform: translateY(-50%) scale(.75, .25);
 			transform: translateY(-50%) scale(.75, .25);
+			left: -5px;
 		}
 	}
 
