@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\User;
+use Bogardo\Mailgun\Facades\Mailgun;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
