@@ -52,7 +52,7 @@
           this.page = oldVal;
           this.$nextTick(() => {
             this.page = oldVal;
-            let canvas = $('canvas')[0]
+            let canvas = $('canvas')[0];
             let ctx = canvas.getContext("2d");
             // ctx.filter = 'blur(10px)';
             ctx.fillStyle = 'rgba(200, 200, 200, .95)';
