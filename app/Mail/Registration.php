@@ -31,8 +31,8 @@ class Registration extends Mailable
      */
     public function build()
     {
-        $view = $this->markdown('emails.register');
-        Mailgun::send($view, ['user' => $this->user], function($message) {
+        //$view = $this->markdown('emails.register');
+        Mailgun::send('emails.register', ['user' => $this->user], function($message) {
             $message->subject('Welcome!')->to($this->user->email, $this->user->name);
         });
 

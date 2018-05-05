@@ -1,8 +1,6 @@
-@component('mail::message')
-    # Welcome to ThisDay!
+# Welcome to ThisDay!
 
-    Welcome to the site, {{ $user['name'] }}!
+Welcome to the site, {{ $user['name'] }}!
 
-    Thanks,<br>
-    This Day Team
-@endcomponent
+Thanks,<br>
+This Day Team
