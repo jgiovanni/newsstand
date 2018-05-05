@@ -33,6 +33,9 @@ Route::get('/editorials/{category}', function ($category) {
 Route::get('/breaking-news', function () {
     return view('breaking-news');
 })->name('breaking-news');
+Route::get('/subscribe', function () {
+    return view('subscribe');
+})->name('subscribe');
 Route::get('/profile', function () {
     return view('editorials.category');
 })->name('profile');

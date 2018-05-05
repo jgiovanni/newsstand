@@ -1,7 +1,7 @@
 <template>
-	<div>
+	<div id="pdf-container">
 		<b-progress v-if="loadedRatio < 1" :value="(loadedRatio * 100)" animated></b-progress>
-		<pdf v-if="source && !multi"
+		<pdf v-if="source"
 		     :src="source"
 		     :page="page"
 		     @password="password"
@@ -9,17 +9,10 @@
 		     @error="error"
 		     @num-pages="numPages = $event"
 		     @link-clicked="page = $event"></pdf>
-		<!--<pdf v-else-if="src && multi" v-for="i in numPages"
-			:key="i"
-			:src="src"
-			:page="i"
-			 @password="password"
-			 @progress="loadedRatio = $event"
-			 @error="error"
-			 @num-pages="numPages = maxPage"
-			 @link-clicked="page = $event"></pdf>-->
 
-		<b-pagination-nav class="pdf-nav" align="center" v-if="numPages" base-url="#" :number-of-pages="numPages" v-model="page" />
+		<share-buttons></share-buttons>
+
+		<b-pagination-nav class="pdf-nav" align="center" v-if="pagination && numPages" base-url="#" :number-of-pages="numPages" v-model="page" />
 	</div>
 </template>
 <style>
@@ -30,13 +23,16 @@
 <script type="text/javascript">
   import pdf from 'vue-pdf';
   import stickybits from 'stickybits';
+  window.stickybits = stickybits;
+  import shareButtons from './share-buttons';
 
   export default {
     name: 'pdf-doc',
-    components: { pdf },
+    components: { pdf, shareButtons },
     props: {
       source: { type: String, },
-      multi: { type: Boolean, default: false },
+      fullAccess: { type: Boolean, default: false },
+      pagination: { type: Boolean, default: true },
       maxPage: { type: Number, default: 3 },
       search: { type: String, },
     },
@@ -48,6 +44,23 @@
         page: 1,
         numPages: undefined,
         rotate: 0,
+      }
+    },
+    watch: {
+      page(val, oldVal) {
+        if (val > 3 && !this.fullAccess) {
+          this.page = oldVal;
+          this.$nextTick(() => {
+            this.page = oldVal;
+            let canvas = $('canvas')[0]
+            let ctx = canvas.getContext("2d");
+            // ctx.filter = 'blur(10px)';
+            ctx.fillStyle = 'rgba(200, 200, 200, .95)';
+
+            ctx.fillRect(5, 5, canvas.width-5, canvas.height-5);
+            $('#subscribeCTA').modal({ keyboard: false, backdrop: 'static'})
+          });
+        }
       }
     },
     methods: {
@@ -67,9 +80,10 @@
       this.src.then(pdf => {
         this.numPages = pdf.numPages;
       }).then(() => {
-        stickybits('.pdf-nav');
-        // let ctx = $('canvas')[0].getContext("2d");
-        // ctx.scale(3, 3);
+        // stickybits({ scrollEl: '#pdf-container', useStickyClasses: true });
+        stickybits('.pdf-nav', { scrollEl: '#pdf-container', useStickyClasses: true });
+        // stickybits('.pdf-share', { scrollEl: '#pdf-container', useStickyClasses: true });
+		// let ctx = $('canvas')[0].getContext("2d");
       });
     }
   }

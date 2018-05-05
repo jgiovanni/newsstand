@@ -10,11 +10,7 @@
                 </div>
             @endif
 
-            @guest
-                <pdf src="./pdfs/20180425TD.pdf"></pdf>
-            @else
-                <pdf-doc source="/pdfs/20180425TD.pdf"></pdf-doc>
-            @endguest
+            <pdf-doc source="/pdfs/20180425TD.pdf" :full-access="{{ auth()->check() ? Auth('subscription_active') : 'false' }}"></pdf-doc>
         </div>
     </div>
 </main><!-- /.container -->
