@@ -73,7 +73,6 @@ class RegisterController extends Controller
         ]);
 
         Mail::to($data['email'])->send(new Registration($user));
-        Mail::to($data['email'])->send(new Test());
 
         return $user;
     }
