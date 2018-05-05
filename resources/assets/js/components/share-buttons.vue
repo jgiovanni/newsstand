@@ -36,6 +36,14 @@
 		transform: translateY(-50%) scale(.75, .75);
 	}
 
+	@media (max-width: 768px) {
+		.icon-bar {
+			-webkit-transform: translateY(-50%) scale(.75, .25);
+			-ms-transform: translateY(-50%) scale(.75, .25);
+			transform: translateY(-50%) scale(.75, .25);
+		}
+	}
+
 	.icon-bar span {
 		display: block;
 		text-align: center;
