@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Mailgun\Mailgun;
 
 class Registration extends Mailable
 {
@@ -30,7 +31,12 @@ class Registration extends Mailable
      */
     public function build()
     {
-        return $this->subject('Welcome to ThisDay!')->markdown('emails.register')
-            ->with(['user' => $this->user]);
+        $view = $this->markdown('emails.register');
+        Mailgun::send($view, ['user' => $this->user], function($message) {
+            $message->subject('Welcome!')->to($this->user->email, $this->user->name);
+        });
+
+//        return $this->subject('Welcome to ThisDay!')->markdown('emails.register')
+//            ->with(['user' => $this->user]);
     }
 }
