@@ -9,8 +9,10 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <h1>Past News</h1>
-                <datepicker :value="pastPapers.date" :highlighted="pastPapers.highlighted" @@input="loadPdf"></datepicker>
+                    <div class="container">
+                        <h1>Past News</h1>
+                        This Day in Print for <datepicker :value="pastPapers.date" :highlighted="pastPapers.highlighted" @@input="loadPdf"></datepicker>
+                    </div>
                     <pdf-doc :source="pastPapers.pdf" :full-access="{{ auth()->check() && Auth()->user()->subscription_active ? 'true' : 'false' }}"></pdf-doc>
             </div>
         </div>

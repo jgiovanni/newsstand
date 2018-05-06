@@ -9,7 +9,10 @@
                         {{ session('status') }}
                     </div>
                 @endif
-                <h1>Subscribe</h1>
+                    <div class="container">
+
+                    </div>
+                    <h1>Subscribe</h1>
             </div>
         </div>
     </main><!-- /.container -->
