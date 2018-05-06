@@ -38,6 +38,14 @@
 
 	@media (max-width: 768px) {
 		.icon-bar {
+			-webkit-transform: translateY(-50%) scale(.50, .50);
+			-ms-transform: translateY(-50%) scale(.50, .50);
+			transform: translateY(-50%) scale(.50, .50);
+			left: -5px;
+		}
+	}
+	@media (max-width: 480px) {
+		.icon-bar {
 			-webkit-transform: translateY(-50%) scale(.25, .25);
 			-ms-transform: translateY(-50%) scale(.25, .25);
 			transform: translateY(-50%) scale(.25, .25);

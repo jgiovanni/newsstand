@@ -1,5 +1,12 @@
 <template>
 	<div id="pdf-container">
+		<div v-if="hasError" class="alert alert-warning alert-dismissible fade show" role="alert">
+			There was an error loading the newspaper. Please try again later.
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+
 		<b-progress v-if="loadedRatio < 1" :value="(loadedRatio * 100)" animated></b-progress>
 		<pdf v-if="source"
 		     :src="source"
@@ -45,10 +52,12 @@
         numPages: undefined,
         rotate: 0,
         pdfReady: false,
+        hasError: false,
       }
     },
     watch: {
       source(val, oldVal) {
+        this.hasError = false;
         this.pdfReady = false;
         // this.src = pdf.createLoadingTask(this.source);
         this.$nextTick(() => {
@@ -77,7 +86,7 @@
         updatePassword(prompt('password is "test"'));
       },
       error: function(err) {
-
+		this.hasError = true;
         console.log(err);
       }
     },
