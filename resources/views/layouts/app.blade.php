@@ -28,7 +28,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div id="app" data-callCTA="{{ auth()->check() && Auth()->user()->isOnline() && !Auth()->user()->subscription_active }}">
         @guest
             <nav class="navbar navbar-expand-sm navbar-light navbar-laravel sticky-top">
                 <div class="container-fluid" style="max-width: 1440px;">
@@ -174,6 +174,11 @@
                 </div>
             </nav>
         @endauth
+        <div class="container">
+            <nav class="nav">
+                <a class="nav-link">Today: {{ Carbon\Carbon::now()->toFormattedDateString() }}</a>
+            </nav>
+        </div>
 
         <main class="py-4">
             <div class="container pb-4">
@@ -383,5 +388,6 @@
 
         </footer>
     </div>
+
 </body>
 </html>

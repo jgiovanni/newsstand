@@ -44,9 +44,17 @@
         page: 1,
         numPages: undefined,
         rotate: 0,
+        pdfReady: false,
       }
     },
     watch: {
+      source(val, oldVal) {
+        this.pdfReady = false;
+        // this.src = pdf.createLoadingTask(this.source);
+        this.$nextTick(() => {
+          this.pdfReady = true;
+        })
+      },
       page(val, oldVal) {
         if (val > 3 && !this.fullAccess) {
           this.page = oldVal;
@@ -79,6 +87,8 @@
     mounted() {
       this.src.then(pdf => {
         this.numPages = pdf.numPages;
+        this.pdfReady = true;
+        console.log('PDF Ready');
       }).then(() => {
         // stickybits({ scrollEl: '#pdf-container', useStickyClasses: true });
         stickybits('.pdf-nav', { scrollEl: '#pdf-container', useStickyClasses: true });

@@ -37,5 +37,5 @@ Route::get('/subscribe', function () {
     return view('subscribe');
 })->name('subscribe');
 Route::get('/profile', function () {
-    return view('editorials.category');
+    return view('profile');
 })->name('profile');
