@@ -42,7 +42,8 @@ const app = new Vue({
   methods: {
     loadPdf(date) {
       let m = moment(date);
-      this.pastPapers.pdf = `/pdfs/${m.format('YYYYMMDD')}TD.pdf`;
+      window.location.href = `/past/${m.format('YYYYMMDD')}`;
+      // this.pastPapers.pdf = `/pdfs/${m.format('YYYYMMDD')}TD.pdf`;
     }
   },
   mounted() {

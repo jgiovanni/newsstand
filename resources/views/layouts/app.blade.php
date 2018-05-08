@@ -28,7 +28,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app" data-callCTA="{{ auth()->check() && Auth()->user()->isOnline() && !Auth()->user()->subscription_active }}">
+    <li id="app" data-callCTA="{{ auth()->check() && Auth()->user()->isOnline() && !Auth()->user()->subscription_active }}">
         @guest
             <nav class="navbar navbar-expand-sm navbar-light navbar-laravel sticky-top">
                 <div class="container-fluid" style="max-width: 1440px;">
@@ -75,7 +75,7 @@
             </nav>
         @else
             <nav class="navbar navbar-expand-sm navbar-light navbar-laravel sticky-top">
-                <div class="container-fluid" style="max-width: 1440px;">
+                <li class="container-fluid" style="max-width: 1440px;">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         <img src="{{ asset('thisday-logo-300x72.png') }}" width="125" height="30" class="d-inline-block align-top" alt="This Day">
                     </a>
@@ -106,11 +106,19 @@
                                     </form>
                                 </div>
                             </li>
-                            <div class="collapse navbar-collapse" id="navbarSubnavContent">
+                            <li class="collapse navbar-collapse" id="navbarSubnavContent">
                                 <!-- Left Side Of Navbar -->
                                 <ul class="navbar-nav mr-auto">
                                     <li class="{{ areActiveRoutes(['home', 'today']) }}"><a class="nav-link" href="{{ route('today') }}">Today's Newspaper</a></li>
-                                    <li class="{{ isActiveRoute('past') }}"><a class="nav-link" href="{{ route('past') }}">Past Newspaper</a></li>
+                                    <li class="{{ isActiveRoute('past') }} dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" id="pastDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Past Newspaper
+                                        </a>
+
+                                        <div class="dropdown-menu" aria-labelledby="pastDropdown">
+                                            <datepicker :value="pastPapers.date" :highlighted="pastPapers.highlighted" @@input="loadPdf" inline></datepicker>
+                                        </div>
+                                    </li>
                                     <li class="nav-item dropdown">
                                         <a id="navbarDropdown" class="nav-link dropdown-toggle {{ isActiveRoute('editorials') }}" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                             Editorials <span class="caret"></span>
@@ -160,7 +168,7 @@
                                 <ul class="navbar-nav ml-auto">
 
                                 </ul>
-                            </div>
+                            </li>
                         @endguest
                     </ul>
 
@@ -171,7 +179,7 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                     </ul>
-                </div>
+                </li>
             </nav>
         @endauth
         <div class="container">

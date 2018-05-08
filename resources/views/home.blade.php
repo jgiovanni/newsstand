@@ -10,7 +10,7 @@
                 </div>
             @endif
 
-            <pdf-doc source="/pdfs/20180425TD.pdf" :full-access="{{ auth()->check() ? Auth()->user()->subscription_active : 'false' }}"></pdf-doc>
+            <pdf-doc source="/pdfs/20180425TD.pdf" :full-access="false"></pdf-doc>
         </div>
     </div>
 </main><!-- /.container -->

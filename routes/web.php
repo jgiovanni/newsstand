@@ -21,8 +21,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/today', function () {
     return view('home');
 })->name('today');
-Route::get('/past', function () {
-    return view('past-news');
+Route::get('/past/{date}', function ($date) {
+    return view('past-news', compact('date'));
 })->name('past');
 Route::get('/articles', function () {
     return view('articles.index');

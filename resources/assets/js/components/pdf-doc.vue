@@ -91,6 +91,7 @@
       }
     },
     created() {
+      console.log('PDF Loading');
       // this.src = pdf.createLoadingTask(this.source);
     },
     mounted() {
